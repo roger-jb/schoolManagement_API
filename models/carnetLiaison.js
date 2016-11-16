@@ -5,7 +5,7 @@ var models = require('./index');
 
 module.exports = function (sequelize, DataTypes) {
   var CarnetLiaison = sequelize.define(
-    'carnetLiaison',
+    'carnet_liaison',
     {
       contenu: {
         type: DataTypes.TEXT,
@@ -37,7 +37,7 @@ module.exports = function (sequelize, DataTypes) {
             }
           );
           CarnetLiaison.belongsTo(
-            models.carnetLiaison,
+            models.carnet_liaison,
             {
               foreignKey: 'messageOrigineId',
               onDelete: 'restrict',
@@ -45,7 +45,7 @@ module.exports = function (sequelize, DataTypes) {
             }
           );
           CarnetLiaison.hasOne(
-            models.carnetLiaison,
+            models.carnet_liaison,
             {
               foreignKey:'messageOrigineId',
               onDelete: 'restrict',

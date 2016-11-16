@@ -34,7 +34,7 @@ module.exports = function (sequelize, DataTypes) {
             }
           );
           PointCpt.hasMany(
-            models.etudiant_cpt_semestre,
+            models.etudiant_semestre_cpt,
             {
               onDelete: 'restrict',
               onUpdate: 'restrict'

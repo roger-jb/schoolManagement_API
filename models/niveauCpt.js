@@ -33,7 +33,7 @@ module.exports = function (sequelize, DataTypes) {
             }
           );
           NiveauCpt.hasMany(
-            models.etudiant_cpt_semestre,
+            models.etudiant_semestre_cpt,
             {
               onDelete: 'restrict',
               onUpdate: 'restrict'

@@ -7,14 +7,13 @@ module.exports = function (sequelize, DataTypes) {
   var ClasseMatiere = sequelize.define(
     'classe_matiere',
     {
-      libelle: {
-        type: DataTypes.STRING(255),
-        allowNull: false,
-        unique: true
+      classeId:{
+        type: DataTypes.INTEGER,
+        unique: 'idxUniClasseMatiere'
       },
-      code: {
-        type: DataTypes.STRING(255),
-        unique: true
+      matiereId:{
+        type: DataTypes.INTEGER,
+        unique: 'idxUniClasseMatiere'
       }
     },
     {
@@ -23,6 +22,7 @@ module.exports = function (sequelize, DataTypes) {
           ClasseMatiere.belongsTo(
             models.classe,
             {
+              foreignKey:{allowNull:false},
               onDelete: 'restrict',
               onUpdate: 'restrict'
             }
@@ -30,6 +30,7 @@ module.exports = function (sequelize, DataTypes) {
           ClasseMatiere.belongsTo(
             models.matiere,
             {
+              foreignKey:{allowNull:false},
               onDelete: 'restrict',
               onUpdate: 'restrict'
             }

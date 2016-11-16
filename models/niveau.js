@@ -29,6 +29,13 @@ module.exports = function (sequelize, DataTypes) {
               onUpdate: 'restrict'
             }
           );
+          Niveau.hasMany(
+            models.matiere_niveau,
+            {
+              onDelete: 'restrict',
+              onUpdate: 'restrict'
+            }
+          )
         }
       }
     }

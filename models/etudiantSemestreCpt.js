@@ -4,8 +4,8 @@
 var models = require('./index');
 
 module.exports = function (sequelize, DataTypes) {
-  var EleveCptSemestre = sequelize.define(
-    'etudiant_cpt_semestre',
+  var EtudiantSemestreCpt = sequelize.define(
+    'etudiant_semestre_cpt',
     {
       trimestreId: {
         type: DataTypes.INTEGER,
@@ -30,7 +30,7 @@ module.exports = function (sequelize, DataTypes) {
     {
       classMethods: {
         associate: function (models) {
-          EleveCptSemestre.belongsTo(
+          EtudiantSemestreCpt.belongsTo(
             models.semestre,
             {
               foreignKey: 'trimestreId',
@@ -38,7 +38,7 @@ module.exports = function (sequelize, DataTypes) {
               onUpdate: 'restrict'
             }
           );
-          EleveCptSemestre.belongsTo(
+          EtudiantSemestreCpt.belongsTo(
             models.etudiant,
             {
               foreignKey: 'eleveId',
@@ -46,7 +46,7 @@ module.exports = function (sequelize, DataTypes) {
               onUpdate: 'restrict'
             }
           );
-          EleveCptSemestre.belongsTo(
+          EtudiantSemestreCpt.belongsTo(
             models.pointCpt,
             {
               foreignKey: 'pointCptId',
@@ -54,7 +54,7 @@ module.exports = function (sequelize, DataTypes) {
               onUpdate: 'restrict'
             }
           );
-          EleveCptSemestre.belongsTo(
+          EtudiantSemestreCpt.belongsTo(
             models.niveau_cpt,
             {
               onDelete: 'restrict',
@@ -65,5 +65,5 @@ module.exports = function (sequelize, DataTypes) {
       }
     }
   );
-  return EleveCptSemestre;
+  return EtudiantSemestreCpt;
 };

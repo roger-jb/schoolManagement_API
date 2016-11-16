@@ -28,7 +28,7 @@ module.exports = function (sequelize, DataTypes) {
           Tuteur.belongsToMany(
             models.etudiant,
             {
-              through: 'eleve_responsable',
+              through: 'etudiant_tuteur',
               onDelete: 'restrict',
               onUpdate: 'restrict'
             }

@@ -35,9 +35,10 @@ module.exports = function (sequelize, DataTypes) {
               onUpdate: 'restrict'
             }
           );
-          MatiereNiveau.belongsTo(
+          MatiereNiveau.belongsToMany(
             models.enseignant,
             {
+              through: 'enseignantMatiereNiveau',
               onDelete:'restrict',
               onUpdate:'restrict'
             }

@@ -91,7 +91,7 @@ module.exports = function (sequelize, DataTypes) {
             }
           );
           Utilisateur.hasMany(
-            models.carnetLiaison,
+            models.carnet_liaison,
             {
               foreignKey: 'redacteurId',
               onDelete: 'restrict',

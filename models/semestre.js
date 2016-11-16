@@ -12,29 +12,36 @@ module.exports = function (sequelize, DataTypes) {
         unique: true,
         allowNull: false
       },
-      dateDebut:{
+      dateDebut: {
         type: DataTypes.DATEONLY,
         allowNull: false
       },
       dateFin: {
         type: DataTypes.DATEONLY,
-        allowNull:false
+        allowNull: false
       },
       dateFinCommentaire: {
         type: DataTypes.DATEONLY,
-        allowNull:false
+        allowNull: false
       }
     },
     {
       classMethods: {
         associate: function (models) {
           Semestre.hasMany(
-            models.etudiant_cpt_semestre,
+            models.etudiant_semestre_cpt,
             {
               onDelete: 'restrict',
               onUpdate: 'restrict'
             }
           );
+          Semestre.belongsTo(
+            models.annee_scolaire,
+            {
+              onDelete: 'restrict',
+              onUpdate: 'restrict'
+            }
+          )
         }
       }
     }

@@ -29,6 +29,21 @@ module.exports = function (sequelize, DataTypes) {
               onUpdate: 'restrict'
             }
           );
+          Classe.belongsToMany(
+            models.etudiant,
+            {
+              through: 'classe_etudiant',
+              onDelete: 'restrict',
+              onUpdate: 'restrict'
+            }
+          );
+          Classe.hasMany(
+            models.communication,
+            {
+              onDelete: 'restrict',
+              onUpdate: 'restrict'
+            }
+          );
         }
       }
     }

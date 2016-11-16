@@ -18,9 +18,10 @@ module.exports = function (sequelize, DataTypes) {
               onUpdate: 'restrict'
             }
           );
-          Etudiant.belongsTo(
+          Etudiant.belongsToMany(
             models.classe,
             {
+              through: 'classe_etudiant',
               onDelete: 'restrict',
               onUpdate: 'restrict'
             }
@@ -28,7 +29,7 @@ module.exports = function (sequelize, DataTypes) {
           Etudiant.belongsToMany(
             models.tuteur,
             {
-              through: 'eleve_responsable',
+              through: 'etudiant_tuteur',
               onDelete: 'restrict',
               onUpdate: 'restrict'
             }
@@ -48,7 +49,7 @@ module.exports = function (sequelize, DataTypes) {
             }
           );
           Etudiant.hasMany(
-            models.carnetLiaison,
+            models.carnet_liaison,
             {
               onUpdate: 'restrict',
               onDelete: 'restrict'
@@ -76,7 +77,7 @@ module.exports = function (sequelize, DataTypes) {
             }
           );
           Etudiant.hasMany(
-            models.etudiant_cpt_semestre,
+            models.etudiant_semestre_cpt,
             {
               onDelete: 'restrict',
               onUpdate: 'restrict'

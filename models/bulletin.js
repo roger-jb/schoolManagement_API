@@ -24,13 +24,21 @@ module.exports = function (sequelize, DataTypes) {
             }
           );
           Bulletin.belongsTo(
-            models.matiere_niveau,
+            models.matiere,
             {
               foreignKey: {allowNull:false},
               onDelete:'restrict',
               onUpdate:'restrict'
             }
           );
+          Bulletin.belongsTo(
+            models.semestre,
+            {
+              foreignKey: {allowNull:false},
+              onDelete:'restrict',
+              onUpdate:'restrict'
+            }
+          )
         }
       }
     }
