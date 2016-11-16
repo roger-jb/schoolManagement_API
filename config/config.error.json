@@ -73,6 +73,30 @@
       "error": "Utilisateur déja éxistant."
     }
   },
+  "domaineCpt": {
+    "notFound": {
+      "success": false,
+      "errno": "0100",
+      "error": "Domaine de compétence non trouvé."
+    },
+    "alreadyExist": {
+      "success": false,
+      "errno": "0101",
+      "error": "Domaine de compétence déja éxistant."
+    }
+  },
+  "champCpt": {
+    "notFound": {
+      "success": false,
+      "errno": "0100",
+      "error": "Champs de compétence non trouvé."
+    },
+    "alreadyExist": {
+      "success": false,
+      "errno": "0101",
+      "error": "Champs de compétence déja éxistant."
+    }
+  },
   "administrateur": {
     "notFound": {
       "success": false,

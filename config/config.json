@@ -1,8 +1,8 @@
 {
   "development": {
-    "username": "edeip",
-    "password": "edeip",
-    "database": "edeip",
+    "username": "root",
+    "password": null,
+    "database": "schoolmanagement",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
