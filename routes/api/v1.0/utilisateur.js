@@ -18,10 +18,11 @@ router.get('/', function (req, res, next) {
       include: [
         models.administrateur,
         models.etudiant,
-        models.professeur,
-        models.responsable
+        models.enseignant,
+        models.tuteur
       ]
-    })
+    }
+  )
     .then(function (utilisateurs) {
       res.send({
         success: true,
@@ -54,8 +55,8 @@ router.get('/:id', function (req, res, next) {
           include: [
             models.administrateur,
             models.etudiant,
-            models.professeur,
-            models.responsable
+            models.enseignant,
+            models.tuteur
           ]
         })
       .then(function (utilisateur) {

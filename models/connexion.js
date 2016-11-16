@@ -10,9 +10,9 @@ module.exports = function (sequelize, DataTypes) {
       login: {
         allowNull: false,
         type: DataTypes.STRING(255),
-        unique:true
+        unique: true
       },
-      password:{
+      password: {
         allowNull: false,
         type: DataTypes.STRING(255)
       }
@@ -20,7 +20,14 @@ module.exports = function (sequelize, DataTypes) {
     {
       classMethods: {
         associate: function (models) {
-          Connexion.belongsTo(models.utilisateur, {foreignKey: 'id', onDelete: 'restrict', onUpdate: 'restrict'});
+          Connexion.belongsTo(
+            models.utilisateur,
+            {
+              foreignKey: 'id',
+              onDelete: 'restrict',
+              onUpdate: 'restrict'
+            }
+          );
         }
       }
     }

@@ -10,13 +10,29 @@ module.exports = function (sequelize, DataTypes) {
     {
       classMethods: {
         associate: function (models) {
-          Enseignant.belongsTo(models.utilisateur, {foreignKey: 'id', onDelete: 'restrict', onUpdate: 'restrict'});
+          Enseignant.belongsTo(
+            models.utilisateur,
+            {
+              foreignKey: 'id',
+              onDelete: 'restrict',
+              onUpdate: 'restrict'
+            }
+          );
           Enseignant.hasMany(
             models.matiere_niveau,
             {
               onDelete: 'restrict',
               onUpdate: 'restrict'
-            });
+            }
+          );
+          Enseignant.belongsToMany(
+            models.campus,
+            {
+              through: 'enseignant_campus',
+              onUpdate: 'restrict',
+              onDelete: 'restrict'
+            }
+          )
         }
       }
     }
