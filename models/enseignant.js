@@ -4,14 +4,14 @@
 var models = require('./index');
 
 module.exports = function (sequelize, DataTypes) {
-  var Professeur = sequelize.define(
-    'professeur',
+  var Enseignant = sequelize.define(
+    'enseignant',
     {},
     {
       classMethods: {
         associate: function (models) {
-          Professeur.belongsTo(models.utilisateur, {foreignKey: 'id', onDelete: 'restrict', onUpdate: 'restrict'});
-          Professeur.hasMany(
+          Enseignant.belongsTo(models.utilisateur, {foreignKey: 'id', onDelete: 'restrict', onUpdate: 'restrict'});
+          Enseignant.hasMany(
             models.matiere_niveau,
             {
               onDelete: 'restrict',
@@ -21,5 +21,5 @@ module.exports = function (sequelize, DataTypes) {
       }
     }
   );
-  return Professeur;
+  return Enseignant;
 };

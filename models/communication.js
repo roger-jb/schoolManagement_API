@@ -26,6 +26,13 @@ module.exports = function (sequelize, DataTypes) {
               onUpdate: 'restrict'
             }
           );
+          Communication.belongsTo(
+            models.classe,
+            {
+              onDelete: 'restrict',
+              onUpdate: 'restrict'
+            }
+          );
         }
       }
     }

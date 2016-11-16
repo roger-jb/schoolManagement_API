@@ -4,29 +4,31 @@
 var models = require('./index');
 
 module.exports = function (sequelize, DataTypes) {
-  var CahierTexte = sequelize.define(
-    'cahierTexte',
-    {
-      contenu: {
-        type: DataTypes.TEXT,
-        allowNull: false
-      }
-    },
+  var Tuteur = sequelize.define(
+    'tuteur',
+    {},
     {
       classMethods: {
         associate: function (models) {
-          CahierTexte.belongsTo(
-            models.matiere_niveau,
+          Tuteur.belongsTo(
+            models.utilisateur,
             {
-              foreignKey: {allowNull: false},
+              foreignKey: 'id',
               onDelete: 'restrict',
               onUpdate: 'restrict'
             }
           );
-          CahierTexte.belongsTo(
-            models.utilisateur,
+          Tuteur.belongsTo(
+            models.antenne_entreprise,
             {
-              foreignKey:{name:'redacteurId', allowNull:false},
+              onDelete: 'restrict',
+              onUpdate: 'restrict'
+            }
+          );
+          Tuteur.belongsToMany(
+            models.etudiant,
+            {
+              through: 'eleve_responsable',
               onDelete: 'restrict',
               onUpdate: 'restrict'
             }
@@ -35,5 +37,5 @@ module.exports = function (sequelize, DataTypes) {
       }
     }
   );
-  return CahierTexte;
+  return Tuteur;
 };

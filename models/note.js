@@ -34,7 +34,7 @@ module.exports = function (sequelize, DataTypes) {
             }
           );
           Note.belongsTo(
-            models.eleve,
+            models.etudiant,
             {
               foreignKey : 'eleveId',
               onDelete: 'restrict',

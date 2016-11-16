@@ -1,46 +1,53 @@
 /**
- * Created by Jean-Baptiste on 24/10/2016.
+ * Created by Jean-Baptiste on 16/11/2016.
  */
 var models = require('./index');
 
 module.exports = function (sequelize, DataTypes) {
-  var Periode = sequelize.define(
-    'periode',
+  var Campus = sequelize.define(
+    'campus',
     {
       libelle: {
         type: DataTypes.STRING(255),
         unique: true,
-        allowNull:false
-      },
-      dateDebut:{
-        type: DataTypes.DATEONLY,
         allowNull: false
       },
-      dateFin:{
-        type: DataTypes.DATEONLY,
-        allowNull:false
+      adr1: {
+        type: DataTypes.STRING
+      },
+      adr2: {
+        type: DataTypes.STRING
+      },
+      cp: {
+        type: DataTypes.STRING
+      },
+      ville: {
+        type: DataTypes.STRING
       }
     },
     {
       classMethods: {
         associate: function (models) {
-          Periode.belongsTo(
-            models.trimestre,
+          Campus.belongsTo(
+            models.Entreprise,
+            {
+              foreignKey: {
+                allowNull: false
+              },
+              onDelete: 'restrict',
+              onUpdate: 'restrict'
+            }
+          );
+          Campus.hasMany(
+            models.tuteur,
             {
               onDelete: 'restrict',
               onUpdate: 'restrict'
             }
           );
-          Periode.hasMany(
-            models.plan_travail,
-            {
-              onDelete: 'restrict',
-              onUpdate: 'restrict'
-            }
-          )
         }
       }
     }
   );
-  return Periode;
+  return Campus;
 };

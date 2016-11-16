@@ -21,7 +21,7 @@ router.get('/', function (req, res, next) {
         include: [
           models.utilisateur,
           {
-            model:models.eleve,
+            model:models.etudiant,
             include: [
               models.utilisateur
             ]
@@ -54,7 +54,7 @@ router.get('/:id', function (req, res, next) {
           include: [
             models.utilisateur,
             {
-              model:models.eleve,
+              model:models.etudiant,
               include: [
                 models.utilisateur
               ]

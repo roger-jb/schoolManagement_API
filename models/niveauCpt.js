@@ -26,14 +26,14 @@ module.exports = function (sequelize, DataTypes) {
       classMethods: {
         associate: function (models) {
           NiveauCpt.hasMany(
-            models.eleve_evaluation_cpt,
+            models.etudiant_evaluation_cpt,
             {
               onDelete: 'restrict',
               onUpdate: 'restrict'
             }
           );
           NiveauCpt.hasMany(
-            models.eleve_cpt_trimestre,
+            models.etudiant_cpt_semestre,
             {
               onDelete: 'restrict',
               onUpdate: 'restrict'

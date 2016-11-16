@@ -27,7 +27,7 @@ module.exports = function (sequelize, DataTypes) {
             }
           );
           CarnetLiaison.belongsTo(
-            models.eleve,
+            models.etudiant,
             {
               foreignKey: {
                 allowNull: false

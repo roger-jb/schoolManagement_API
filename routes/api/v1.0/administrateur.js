@@ -85,7 +85,7 @@ router.post('/', function (req, res, next) {
         {
           include: [
             models.administrateur,
-            models.eleve,
+            models.etudiant,
             models.professeur,
             models.responsable
           ]

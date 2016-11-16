@@ -17,7 +17,7 @@ router.get('/', function (req, res, next) {
     {
       include: [
         models.administrateur,
-        models.eleve,
+        models.etudiant,
         models.professeur,
         models.responsable
       ]
@@ -53,7 +53,7 @@ router.get('/:id', function (req, res, next) {
         {
           include: [
             models.administrateur,
-            models.eleve,
+            models.etudiant,
             models.professeur,
             models.responsable
           ]

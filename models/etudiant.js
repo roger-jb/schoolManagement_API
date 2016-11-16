@@ -4,13 +4,13 @@
 var models = require('./index');
 
 module.exports = function (sequelize, DataTypes) {
-  var Eleve = sequelize.define(
-    'eleve',
+  var Etudiant = sequelize.define(
+    'etudiant',
     {},
     {
       classMethods: {
         associate: function (models) {
-          Eleve.belongsTo(
+          Etudiant.belongsTo(
             models.utilisateur,
             {
               foreignKey: 'id',
@@ -18,58 +18,65 @@ module.exports = function (sequelize, DataTypes) {
               onUpdate: 'restrict'
             }
           );
-          Eleve.belongsTo(
-            models.niveau,
+          Etudiant.belongsTo(
+            models.classe,
             {
               onDelete: 'restrict',
               onUpdate: 'restrict'
             }
           );
-          Eleve.belongsToMany(
-            models.responsable,
+          Etudiant.belongsToMany(
+            models.tuteur,
             {
               through: 'eleve_responsable',
               onDelete: 'restrict',
               onUpdate: 'restrict'
             }
           );
-          Eleve.hasMany(
+          Etudiant.hasMany(
             models.absence,
             {
               onDelete: 'restrict',
               onUpdate: 'restrict'
             }
           );
-          Eleve.hasMany(
+          Etudiant.hasMany(
             models.bulletin,
             {
               onDelete: 'restrict',
               onUpdate: 'restrict'
             }
           );
-          Eleve.hasMany(
+          Etudiant.hasMany(
             models.carnetLiaison,
             {
               onUpdate: 'restrict',
               onDelete: 'restrict'
             }
           );
-          Eleve.hasMany(
+          Etudiant.belongsTo(
+            models.antenne_entreprise,
+            {
+              onDelete: 'restrict',
+              onUpdate: 'restrict'
+            }
+          );
+          Etudiant.hasMany(
             models.note,
             {
               onDelete: 'restrict',
               onUpdate: 'restrict'
             }
           );
-          Eleve.hasMany(
-            models.eleve_evaluation_cpt,
+          Etudiant.hasMany(
+            models.etudiant_evaluation_cpt,
             {
               onDelete: 'restrict',
               onUpdate: 'restrict'
             }
           );
-          Eleve.hasMany(
-            models.eleve_cpt_trimestre,
+          Etudiant.hasMany(
+            models.etudiant_cpt_semestre,
             {
               onDelete: 'restrict',
               onUpdate: 'restrict'
@@ -79,5 +86,5 @@ module.exports = function (sequelize, DataTypes) {
       }
     }
   );
-  return Eleve;
+  return Etudiant;
 };

@@ -59,7 +59,7 @@ module.exports = function (sequelize, DataTypes) {
             }
           );
           Utilisateur.hasOne(
-            models.responsable,
+            models.tuteur,
             {
               foreignKey: 'id',
               onDelete: 'restrict',
@@ -67,7 +67,7 @@ module.exports = function (sequelize, DataTypes) {
             }
           );
           Utilisateur.hasOne(
-            models.eleve,
+            models.etudiant,
             {
               foreignKey: 'id',
               onDelete: 'restrict',
@@ -75,7 +75,7 @@ module.exports = function (sequelize, DataTypes) {
             }
           );
           Utilisateur.hasOne(
-            models.professeur,
+            models.enseignant,
             {
               foreignKey: 'id',
               onDelete: 'restrict',
@@ -84,14 +84,6 @@ module.exports = function (sequelize, DataTypes) {
           );
           Utilisateur.hasMany(
             models.absence,
-            {
-              foreignKey: 'redacteurId',
-              onDelete: 'restrict',
-              onUpdate: 'restrict'
-            }
-          );
-          Utilisateur.hasMany(
-            models.cahierTexte,
             {
               foreignKey: 'redacteurId',
               onDelete: 'restrict',

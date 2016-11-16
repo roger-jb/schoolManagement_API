@@ -1,25 +1,27 @@
 /**
- * Created by Jean-Baptiste on 19/10/2016.
+ * Created by Jean-Baptiste on 16/11/2016.
  */
 var models = require('./index');
 
 module.exports = function (sequelize, DataTypes) {
-  var Administrateur = sequelize.define(
-    'administrateur',
-    {},
+  var Ecole = sequelize.define(
+    'ecole',
+    {
+
+    },
     {
       classMethods: {
         associate: function (models) {
-          Administrateur.belongsTo(
-            models.utilisateur,
+          Ecole.hasMany(
+            models.campus,
             {
-              foreignKey: 'id',
               onDelete: 'restrict',
               onUpdate: 'restrict'
-            });
+            }
+          );
         }
       }
     }
   );
-  return Administrateur;
+  return Ecole;
 };

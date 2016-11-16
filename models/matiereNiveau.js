@@ -36,7 +36,7 @@ module.exports = function (sequelize, DataTypes) {
             }
           );
           MatiereNiveau.belongsTo(
-            models.professeur,
+            models.enseignant,
             {
               onDelete:'restrict',
               onUpdate:'restrict'
@@ -50,26 +50,12 @@ module.exports = function (sequelize, DataTypes) {
             }
           );
           MatiereNiveau.hasMany(
-            models.cahierTexte,
-            {
-              onDelete:'restrict',
-              onUpdate: 'restrict'
-            }
-          );
-          MatiereNiveau.hasMany(
             models.evaluation,
             {
               onDelete: 'restrict',
               onUpdate: 'restrict'
             }
           );
-          MatiereNiveau.hasMany(
-            models.plan_travail,
-            {
-              onDelete: 'restrict',
-              onUpdate: 'restrict'
-            }
-          )
         }
       }
     }

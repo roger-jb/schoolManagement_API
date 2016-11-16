@@ -16,7 +16,7 @@ router.use(require('./../../validate'));
 
 //select ALL
 router.get('/', function (req, res, next) {
-  models.eleve
+  models.etuidiant
   .findAll(
     {
       include: [
@@ -46,7 +46,7 @@ router.get('/:id', function (req, res, next) {
     res.statusCode = 412;
     res.send(ErrorList.parametre.notInteger)
   } else {
-    models.eleve
+    models.etudiant
     .findById(
       id, {
         include: [
@@ -95,7 +95,7 @@ router.post('/', function (req, res, next) {
       }
       else {
         var idNiveau = (_.isInteger(_.toInteger(req.body.niveau)) ? _.toInteger(req.body.niveau) : false);
-        models.eleve
+        models.etudiant
         .findById(id)
         .then(function (eleve) {
           if (eleve !== null) {
@@ -109,7 +109,7 @@ router.post('/', function (req, res, next) {
             });
           }
           else {
-            var newEleve = models.eleve.build({id: id});
+            var newEleve = models.etudiant.build({id: id});
             newEleve.save()
             .then(function (unEleve) {
               if (idNiveau) {
@@ -162,7 +162,7 @@ router.put('/:id', function (req, res, next) {
         res.send(ErrorList.utilisateur.notFound);
       }
       else {
-        models.eleve
+        models.etudiant
         .findById(id)
         .then(function (eleve) {
           if (eleve === null) {
@@ -214,7 +214,7 @@ router.put('/:id/responsable', function (req, res, next) {
     res.send(ErrorList.parametre.notInteger)
   }
   else {
-    models.eleve.findById(
+    models.etudiant.findById(
       id,
       {
         include: [

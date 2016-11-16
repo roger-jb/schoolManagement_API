@@ -5,7 +5,7 @@ var models = require('./index');
 
 module.exports = function (sequelize, DataTypes) {
   var EleveEvaluationCpt = sequelize.define(
-    'eleve_evaluation_cpt',
+    'etudiant_evaluation_cpt',
     {
       evaluationCptId:{
         type: DataTypes.INTEGER,
@@ -38,7 +38,7 @@ module.exports = function (sequelize, DataTypes) {
             }
           );
           EleveEvaluationCpt.belongsTo(
-            models.eleve,
+            models.etudiant,
             {
               foreignKey: 'eleveId',
               onDelete: 'restrict',

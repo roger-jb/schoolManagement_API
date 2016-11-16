@@ -16,7 +16,7 @@ module.exports = function (sequelize, DataTypes) {
       classMethods: {
         associate: function (models) {
           Bulletin.belongsTo(
-            models.eleve,
+            models.etudiant,
             {
               foreignKey: {allowNull:false},
               onDelete: 'restrict',

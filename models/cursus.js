@@ -1,29 +1,23 @@
 /**
- * Created by Jean-Baptiste on 24/10/2016.
+ * Created by Jean-Baptiste on 16/11/2016.
  */
 var models = require('./index');
 
 module.exports = function (sequelize, DataTypes) {
-  var Niveau = sequelize.define(
-    'niveau',
+  var Cursus = sequelize.define(
+    'cursus',
     {
       libelle: {
         type: DataTypes.STRING(255),
-        unique: true
+        unique: true,
+        allowNull: false
       }
     },
     {
       classMethods: {
         associate: function (models) {
-          Niveau.belongsTo(
-            models.cursus,
-            {
-              onDelete: 'restrict',
-              onUpdate: 'restrict'
-            }
-          );
-          Niveau.hasMany(
-            models.classe,
+          Cursus.hasMany(
+            models.niveau,
             {
               onDelete: 'restrict',
               onUpdate: 'restrict'
@@ -33,5 +27,5 @@ module.exports = function (sequelize, DataTypes) {
       }
     }
   );
-  return Niveau;
+  return Cursus;
 };

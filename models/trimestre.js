@@ -4,8 +4,8 @@
 var models = require('./index');
 
 module.exports = function (sequelize, DataTypes) {
-  var Trimestre = sequelize.define(
-    'trimestre',
+  var Semestre = sequelize.define(
+    'semestre',
     {
       libelle: {
         type: DataTypes.STRING(255),
@@ -28,15 +28,8 @@ module.exports = function (sequelize, DataTypes) {
     {
       classMethods: {
         associate: function (models) {
-          Trimestre.hasMany(
-            models.periode,
-            {
-              onDelete: 'restrict',
-              onUpdate: 'restrict'
-            }
-          );
-          Trimestre.hasMany(
-            models.eleve_cpt_trimestre,
+          Semestre.hasMany(
+            models.etudiant_cpt_semestre,
             {
               onDelete: 'restrict',
               onUpdate: 'restrict'
@@ -46,5 +39,5 @@ module.exports = function (sequelize, DataTypes) {
       }
     }
   );
-  return Trimestre;
+  return Semestre;
 };

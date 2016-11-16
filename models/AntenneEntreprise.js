@@ -1,23 +1,35 @@
 /**
- * Created by Jean-Baptiste on 24/10/2016.
+ * Created by Jean-Baptiste on 16/11/2016.
  */
 var models = require('./index');
 
 module.exports = function (sequelize, DataTypes) {
-  var PointCpt = sequelize.define(
-    'pointCpt',
+  var AntenneEntreprise = sequelize.define(
+    'antenne_entreprise',
     {
       libelle: {
         type: DataTypes.STRING(255),
         unique: true,
         allowNull: false
+      },
+      adr1: {
+        type: DataTypes.STRING
+      },
+      adr2: {
+        type: DataTypes.STRING
+      },
+      cp: {
+        type: DataTypes.STRING
+      },
+      ville: {
+        type: DataTypes.STRING
       }
     },
     {
       classMethods: {
         associate: function (models) {
-          PointCpt.belongsTo(
-            models.champCpt,
+          AntenneEntreprise.belongsTo(
+            models.Entreprise,
             {
               foreignKey: {
                 allowNull: false
@@ -26,15 +38,15 @@ module.exports = function (sequelize, DataTypes) {
               onUpdate: 'restrict'
             }
           );
-          PointCpt.hasMany(
-            models.evaluation_cpt,
+          AntenneEntreprise.hasMany(
+            models.tuteur,
             {
               onDelete: 'restrict',
               onUpdate: 'restrict'
             }
           );
-          PointCpt.hasMany(
-            models.etudiant_cpt_semestre,
+          AntenneEntreprise.hasMany(
+            models.etudiant,
             {
               onDelete: 'restrict',
               onUpdate: 'restrict'
@@ -44,5 +56,5 @@ module.exports = function (sequelize, DataTypes) {
       }
     }
   );
-  return PointCpt;
+  return AntenneEntreprise;
 };

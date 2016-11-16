@@ -36,7 +36,7 @@ module.exports = function (sequelize, DataTypes) {
             }
           );
           Evaluation.belongsTo(
-            models.matiere_niveau,
+            models.classe_matiere,
             {
               foreignKey: {allowNull:false},
               onDelete: 'restrict',

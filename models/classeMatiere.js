@@ -1,48 +1,49 @@
 /**
- * Created by Jean-Baptiste on 24/10/2016.
+ * Created by Jean-Baptiste on 16/11/2016.
  */
 var models = require('./index');
 
 module.exports = function (sequelize, DataTypes) {
-  var PointCpt = sequelize.define(
-    'pointCpt',
+  var ClasseMatiere = sequelize.define(
+    'classe_matiere',
     {
       libelle: {
         type: DataTypes.STRING(255),
-        unique: true,
-        allowNull: false
+        allowNull: false,
+        unique: true
+      },
+      code: {
+        type: DataTypes.STRING(255),
+        unique: true
       }
     },
     {
       classMethods: {
         associate: function (models) {
-          PointCpt.belongsTo(
-            models.champCpt,
-            {
-              foreignKey: {
-                allowNull: false
-              },
-              onDelete: 'restrict',
-              onUpdate: 'restrict'
-            }
-          );
-          PointCpt.hasMany(
-            models.evaluation_cpt,
+          ClasseMatiere.belongsTo(
+            models.classe,
             {
               onDelete: 'restrict',
               onUpdate: 'restrict'
             }
           );
-          PointCpt.hasMany(
-            models.etudiant_cpt_semestre,
+          ClasseMatiere.belongsTo(
+            models.matiere,
             {
               onDelete: 'restrict',
               onUpdate: 'restrict'
             }
           );
+          ClasseMatiere.hasMany(
+            models.evaluation,
+            {
+              onDelete: 'restrict',
+              onUpdate: 'restrict'
+            }
+          )
         }
       }
     }
   );
-  return PointCpt;
+  return ClasseMatiere;
 };
