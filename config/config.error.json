@@ -1,0 +1,97 @@
+{
+  "header": {
+    "x_app_name": {
+      "missing": {
+        "success": false,
+        "errno": "0011",
+        "error": "x_app_name manquant."
+      },
+      "unexpected": {
+        "succes": false,
+        "errno": "0012",
+        "error": "x_app_name inattendu."
+      }
+    }
+  },
+  "authenticate": {
+    "login": {
+      "success": false,
+      "errno": "0001",
+      "error": "Identifiant non trouvé."
+    },
+    "password": {
+      "success": false,
+      "errno": "0002",
+      "error": "Mot de passe incorrect."
+    },
+    "inactif": {
+      "success": false,
+      "errno": "0003",
+      "error": "Utilisateur désactivé."
+    },
+    "token": {
+      "wrong": {
+        "success": false,
+        "errno": "0004",
+        "error": "Jeton de connexion invalide."
+      },
+      "missing": {
+        "success": false,
+        "errno": "0005",
+        "error": "Jeton de connexion absent."
+      }
+    }
+  },
+  "parametre": {
+    "notInteger": {
+      "success": false,
+      "errno": "0010",
+      "error": "Un paramètre doit être numérique."
+    },
+    "method": {
+      "success": false,
+      "errno": "0011",
+      "error": "La methode HTTP n'est pas autorisée."
+    }
+  },
+  "bdd": {
+    "unexpected": {
+      "success": false,
+      "errno": "0020",
+      "error": ""
+    }
+  },
+  "utilisateur": {
+    "notFound": {
+      "success": false,
+      "errno": "0100",
+      "error": "Utilisateur non trouvé."
+    },
+    "alreadyExist": {
+      "success": false,
+      "errno": "0101",
+      "error": "Utilisateur déja éxistant."
+    }
+  },
+  "administrateur": {
+    "notFound": {
+      "success": false,
+      "errno": "0300",
+      "error": "Respnsable non trouvé."
+    }
+  },
+  "responsable": {
+    "notFound": {
+      "success": false,
+      "errno": "0300",
+      "error": "Respnsable non trouvé."
+    }
+  },
+  "eleve": {
+    "notFound": {
+      "success": false,
+      "errno": "0300",
+      "error": "Respnsable non trouvé."
+    }
+  }
+}

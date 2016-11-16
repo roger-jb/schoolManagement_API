@@ -1,0 +1,12 @@
+{
+  "token": {
+    "secret": "edeipNodeWebService",
+    "ttl":    36000
+  },
+  "header": {
+    "x_app_name": [
+      "EdeipExtranet",
+      "EdeipWebService"
+    ]
+  }
+}
