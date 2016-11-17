@@ -145,6 +145,30 @@
       "error": "Entreprise déja éxistant."
     }
   },
+  "bulletin": {
+    "notFound": {
+      "success": false,
+      "errno": "0100",
+      "error": "Bulletin non trouvé."
+    },
+    "alreadyExist": {
+      "success": false,
+      "errno": "0101",
+      "error": "Bulletin déja éxistant."
+    }
+  },
+  "cursus": {
+    "notFound": {
+      "success": false,
+      "errno": "0100",
+      "error": "Bulletin non trouvé."
+    },
+    "alreadyExist": {
+      "success": false,
+      "errno": "0101",
+      "error": "Bulletin déja éxistant."
+    }
+  },
   "administrateur": {
     "notFound": {
       "success": false,
