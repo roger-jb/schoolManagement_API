@@ -7,19 +7,19 @@ module.exports = function (sequelize, DataTypes) {
   var EtudiantSemestreCpt = sequelize.define(
     'etudiant_semestre_cpt',
     {
-      trimestreId: {
+      semestreId: {
         type: DataTypes.INTEGER,
-        unique: 'idxUniEleveCptTrimestre',
+        unique: 'idxUniEleveCptSemestre',
         allowNull:false
       },
       eleveId: {
         type: DataTypes.INTEGER,
-        unique: 'idxUniEleveCptTrimestre',
+        unique: 'idxUniEleveCptSemestre',
         allowNull:false
       },
       pointCptId: {
         type: DataTypes.INTEGER,
-        unique: 'idxUniEleveCptTrimestre',
+        unique: 'idxUniEleveCptSemestre',
         allowNull:false
       },
       niveauCptId: {
@@ -33,7 +33,7 @@ module.exports = function (sequelize, DataTypes) {
           EtudiantSemestreCpt.belongsTo(
             models.semestre,
             {
-              foreignKey: 'trimestreId',
+              foreignKey: 'semestreId',
               onDelete: 'restrict',
               onUpdate: 'restrict'
             }

@@ -38,13 +38,15 @@ module.exports = function (sequelize, DataTypes) {
               onUpdate: 'restrict'
             }
           );
-          Campus.hasMany(
-            models.tuteur,
+          Campus.belongsToMany(
+            models.enseignant,
             {
+              through: 'enseignant_campus',
               onDelete: 'restrict',
               onUpdate: 'restrict'
             }
           );
+
         }
       }
     }
