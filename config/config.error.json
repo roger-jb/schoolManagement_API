@@ -97,6 +97,54 @@
       "error": "Champs de compétence déja éxistant."
     }
   },
+  "pointCpt": {
+    "notFound": {
+      "success": false,
+      "errno": "0100",
+      "error": "Point de compétence non trouvé."
+    },
+    "alreadyExist": {
+      "success": false,
+      "errno": "0101",
+      "error": "Point de compétence déja éxistant."
+    }
+  },
+  "anneeScolaire": {
+    "notFound": {
+      "success": false,
+      "errno": "0100",
+      "error": "Point de compétence non trouvé."
+    },
+    "alreadyExist": {
+      "success": false,
+      "errno": "0101",
+      "error": "Point de compétence déja éxistant."
+    }
+  },
+  "Entreprise": {
+    "notFound": {
+      "success": false,
+      "errno": "0100",
+      "error": "Entreprise non trouvé."
+    },
+    "alreadyExist": {
+      "success": false,
+      "errno": "0101",
+      "error": "Entreprise déja éxistant."
+    }
+  },
+  "antenne_entreprise": {
+    "notFound": {
+      "success": false,
+      "errno": "0100",
+      "error": "Entreprise non trouvé."
+    },
+    "alreadyExist": {
+      "success": false,
+      "errno": "0101",
+      "error": "Entreprise déja éxistant."
+    }
+  },
   "administrateur": {
     "notFound": {
       "success": false,

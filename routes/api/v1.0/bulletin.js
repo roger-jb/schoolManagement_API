@@ -16,26 +16,23 @@ router.use(require('./../../validate'));
 
 //select ALL
 router.get('/', function (req, res, next) {
-  models.pointCpt
+  models.bulletin
   .findAll(
     {
       include: [
-        {
-          model:models.champCpt,
-          include: [
-            models.domaineCpt
-          ]
-        }
+        models.etudiant,
+        models.semestre,
+        models.matiere
       ]
     }
   )
-  .then(function (pointCpt) {
+  .then(function (bulletin) {
     res.send(
       {
         success: true,
         error: null,
         data: {
-          pointCpt: pointCpt
+          bulletin: bulletin
         }
       }
     );
@@ -49,17 +46,19 @@ router.get('/:id', function (req, res, next) {
     res.statusCode = 412;
     res.send(ErrorList.parametre.notInteger)
   } else {
-    models.pointCpt
+    models.bulletin
     .findById(
       id, {
         include: [
-          models.champCpt
+          models.etudiant,
+          models.semestre,
+          models.matiere
         ]
       })
-    .then(function (pointCpt) {
-      if (pointCpt === null) {
+    .then(function (bulletin) {
+      if (bulletin === null) {
         res.statusCode = 404;
-        res.send(ErrorList.pointCpt.notFound);
+        res.send(ErrorList.bulletin.notFound);
       }
       else {
         res.send(
@@ -67,7 +66,7 @@ router.get('/:id', function (req, res, next) {
             success: true,
             error: null,
             data: {
-              pointCpt: pointCpt
+              bulletin: bulletin
             }
           }
         );
@@ -78,31 +77,31 @@ router.get('/:id', function (req, res, next) {
 
 // insert one
 router.post('/', function (req, res, next) {
-  var libelle = req.body.libelle
-  var champCptId = req.body.champCptId
+  var etudiantId = req.body.etudiantId
+  var semestreId = req.body.semestreId
   if (libelle === false) {
     res.statusCode = 412;
     res.send(ErrorList.parametre.notInteger)
   } else {
-    models.pointCpt.findOne({
+    models.bulletin.findOne({
         where: {
-          libelle: libelle,
-          champCptId: champCptId
+          etudiantId: etudiantId,
+          semestreId: semestreId
         }
       })
-      .then(function (champCpt) {
-        if (champCpt !== null) {
+      .then(function (bulletin) {
+        if (bulletin !== null) {
           res.statusCode = 404;
-          res.send(ErrorList.pointCpt.alreadyExist);
+          res.send(ErrorList.bulletin.alreadyExist);
         }
         else {
-          models.pointCpt.findOrCreate({
+          models.bulletin.findOrCreate({
               where: {
-                libelle: libelle,
-                champCptId: champCptId
+                etudiantId: etudiantId,
+                semestreId: semestreId
               }
             }
-          ).spread(function (pointCpt, created) {
+          ).spread(function (bulletin, created) {
             if (created) {
               res.statusCode = 200;
             }
@@ -113,7 +112,7 @@ router.post('/', function (req, res, next) {
               success: true,
               error: null,
               data: {
-                pointCpt: pointCpt
+                bulletin: bulletin
               }
             });
           });

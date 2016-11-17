@@ -16,26 +16,21 @@ router.use(require('./../../validate'));
 
 //select ALL
 router.get('/', function (req, res, next) {
-  models.pointCpt
+  models.Entreprise
   .findAll(
     {
       include: [
-        {
-          model:models.champCpt,
-          include: [
-            models.domaineCpt
-          ]
-        }
+        models.antenne_entreprise
       ]
     }
   )
-  .then(function (pointCpt) {
+  .then(function (Entreprise) {
     res.send(
       {
         success: true,
         error: null,
         data: {
-          pointCpt: pointCpt
+          Entreprise: Entreprise
         }
       }
     );
@@ -49,17 +44,17 @@ router.get('/:id', function (req, res, next) {
     res.statusCode = 412;
     res.send(ErrorList.parametre.notInteger)
   } else {
-    models.pointCpt
+    models.Entreprise
     .findById(
       id, {
         include: [
-          models.champCpt
+          models.antenne_entreprise
         ]
       })
-    .then(function (pointCpt) {
-      if (pointCpt === null) {
+    .then(function (Entreprise) {
+      if (Entreprise === null) {
         res.statusCode = 404;
-        res.send(ErrorList.pointCpt.notFound);
+        res.send(ErrorList.Entreprise.notFound);
       }
       else {
         res.send(
@@ -67,7 +62,7 @@ router.get('/:id', function (req, res, next) {
             success: true,
             error: null,
             data: {
-              pointCpt: pointCpt
+              Entreprise: Entreprise
             }
           }
         );
@@ -79,30 +74,25 @@ router.get('/:id', function (req, res, next) {
 // insert one
 router.post('/', function (req, res, next) {
   var libelle = req.body.libelle
-  var champCptId = req.body.champCptId
   if (libelle === false) {
     res.statusCode = 412;
     res.send(ErrorList.parametre.notInteger)
   } else {
-    models.pointCpt.findOne({
+    models.Entreprise.findOne({
         where: {
-          libelle: libelle,
-          champCptId: champCptId
+          libelle: libelle
         }
       })
-      .then(function (champCpt) {
-        if (champCpt !== null) {
+      .then(function (Entreprise) {
+        if (Entreprise !== null) {
           res.statusCode = 404;
-          res.send(ErrorList.pointCpt.alreadyExist);
+          res.send(ErrorList.Entreprise.alreadyExist);
         }
         else {
-          models.pointCpt.findOrCreate({
-              where: {
-                libelle: libelle,
-                champCptId: champCptId
-              }
+          models.Entreprise.findOrCreate({
+              where: {libelle: libelle}
             }
-          ).spread(function (pointCpt, created) {
+          ).spread(function (Entreprise, created) {
             if (created) {
               res.statusCode = 200;
             }
@@ -113,7 +103,7 @@ router.post('/', function (req, res, next) {
               success: true,
               error: null,
               data: {
-                pointCpt: pointCpt
+                Entreprise: Entreprise
               }
             });
           });

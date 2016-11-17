@@ -16,31 +16,25 @@ router.use(require('./../../validate'));
 
 //select ALL
 router.get('/', function (req, res, next) {
-  models.pointCpt
-  .findAll(
-    {
-      include: [
-        {
-          model:models.champCpt,
-          include: [
-            models.domaineCpt
-          ]
-        }
-      ]
-    }
-  )
-  .then(function (pointCpt) {
-    res.send(
+  models.absence.findAll(
       {
-        success: true,
-        error: null,
-        data: {
-          pointCpt: pointCpt
-        }
+        include: [
+          models.etudiant
+        ]
       }
-    );
+    )
+    .then(function (absence) {
+      res.send(
+        {
+          success: true,
+          error: null,
+          data: {
+            absence: absence
+          }
+        }
+      );
+    });
   });
-});
 
 // select one
 router.get('/:id', function (req, res, next) {
@@ -49,17 +43,17 @@ router.get('/:id', function (req, res, next) {
     res.statusCode = 412;
     res.send(ErrorList.parametre.notInteger)
   } else {
-    models.pointCpt
+    models.absence
     .findById(
       id, {
         include: [
-          models.champCpt
+          models.etudiant
         ]
       })
-    .then(function (pointCpt) {
-      if (pointCpt === null) {
+    .then(function (absence) {
+      if (absence === null) {
         res.statusCode = 404;
-        res.send(ErrorList.pointCpt.notFound);
+        res.send(ErrorList.absence.notFound);
       }
       else {
         res.send(
@@ -67,7 +61,7 @@ router.get('/:id', function (req, res, next) {
             success: true,
             error: null,
             data: {
-              pointCpt: pointCpt
+              absence: absence
             }
           }
         );
@@ -78,31 +72,37 @@ router.get('/:id', function (req, res, next) {
 
 // insert one
 router.post('/', function (req, res, next) {
-  var libelle = req.body.libelle
-  var champCptId = req.body.champCptId
-  if (libelle === false) {
+  var motif = req.body.motif
+  var valide = req.body.valide
+  var etudiantId = req.body.etudiantId
+  var redacteurId = req.body.redacteurId
+  if (motif === false) {
     res.statusCode = 412;
     res.send(ErrorList.parametre.notInteger)
   } else {
-    models.pointCpt.findOne({
+    models.absence.findOne({
         where: {
-          libelle: libelle,
-          champCptId: champCptId
+          motif: motif,
+          valide: valide,
+          etudiantId: etudiantId,
+          redacteurId: redacteurId
         }
       })
-      .then(function (champCpt) {
-        if (champCpt !== null) {
+      .then(function (absence) {
+        if (absence !== null) {
           res.statusCode = 404;
-          res.send(ErrorList.pointCpt.alreadyExist);
+          res.send(ErrorList.absence.alreadyExist);
         }
         else {
-          models.pointCpt.findOrCreate({
+          models.absence.findOrCreate({
               where: {
-                libelle: libelle,
-                champCptId: champCptId
+                motif: motif,
+                valide: valide,
+                etudiantId: etudiantId,
+                redacteurId: redacteurId
               }
             }
-          ).spread(function (pointCpt, created) {
+          ).spread(function (absence, created) {
             if (created) {
               res.statusCode = 200;
             }
@@ -113,7 +113,7 @@ router.post('/', function (req, res, next) {
               success: true,
               error: null,
               data: {
-                pointCpt: pointCpt
+                absence: absence
               }
             });
           });

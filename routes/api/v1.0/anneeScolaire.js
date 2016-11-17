@@ -16,26 +16,21 @@ router.use(require('./../../validate'));
 
 //select ALL
 router.get('/', function (req, res, next) {
-  models.pointCpt
+  models.annee_scolaire
   .findAll(
     {
       include: [
-        {
-          model:models.champCpt,
-          include: [
-            models.domaineCpt
-          ]
-        }
+        models.semestre
       ]
     }
   )
-  .then(function (pointCpt) {
+  .then(function (annee_scolaire) {
     res.send(
       {
         success: true,
         error: null,
         data: {
-          pointCpt: pointCpt
+          annee_scolaire: annee_scolaire
         }
       }
     );
@@ -49,17 +44,17 @@ router.get('/:id', function (req, res, next) {
     res.statusCode = 412;
     res.send(ErrorList.parametre.notInteger)
   } else {
-    models.pointCpt
+    models.annee_scolaire
     .findById(
       id, {
         include: [
-          models.champCpt
+          models.semestre
         ]
       })
-    .then(function (pointCpt) {
-      if (pointCpt === null) {
+    .then(function (annee_scolaire) {
+      if (annee_scolaire === null) {
         res.statusCode = 404;
-        res.send(ErrorList.pointCpt.notFound);
+        res.send(ErrorList.annee_scolaire.notFound);
       }
       else {
         res.send(
@@ -67,7 +62,7 @@ router.get('/:id', function (req, res, next) {
             success: true,
             error: null,
             data: {
-              pointCpt: pointCpt
+              annee_scolaire: annee_scolaire
             }
           }
         );
@@ -79,30 +74,33 @@ router.get('/:id', function (req, res, next) {
 // insert one
 router.post('/', function (req, res, next) {
   var libelle = req.body.libelle
-  var champCptId = req.body.champCptId
+  var dateDebut = req.body.dateDebut
+  var dateFin = req.body.dateFin
   if (libelle === false) {
     res.statusCode = 412;
     res.send(ErrorList.parametre.notInteger)
   } else {
-    models.pointCpt.findOne({
+    models.annee_scolaire.findOne({
         where: {
           libelle: libelle,
-          champCptId: champCptId
+          dateDebut: dateDebut,
+          dateFin: dateFin
         }
       })
-      .then(function (champCpt) {
-        if (champCpt !== null) {
+      .then(function (annee_scolaire) {
+        if (annee_scolaire !== null) {
           res.statusCode = 404;
-          res.send(ErrorList.pointCpt.alreadyExist);
+          res.send(ErrorList.annee_scolaire.alreadyExist);
         }
         else {
-          models.pointCpt.findOrCreate({
+          models.annee_scolaire.findOrCreate({
               where: {
                 libelle: libelle,
-                champCptId: champCptId
+                dateDebut: dateDebut,
+                dateFin: dateFin
               }
             }
-          ).spread(function (pointCpt, created) {
+          ).spread(function (annee_scolaire, created) {
             if (created) {
               res.statusCode = 200;
             }
@@ -113,7 +111,7 @@ router.post('/', function (req, res, next) {
               success: true,
               error: null,
               data: {
-                pointCpt: pointCpt
+                annee_scolaire: annee_scolaire
               }
             });
           });

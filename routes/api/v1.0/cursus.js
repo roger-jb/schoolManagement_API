@@ -16,26 +16,22 @@ router.use(require('./../../validate'));
 
 //select ALL
 router.get('/', function (req, res, next) {
-  models.pointCpt
+  models.campus
   .findAll(
     {
       include: [
-        {
-          model:models.champCpt,
-          include: [
-            models.domaineCpt
-          ]
-        }
+        models.Entreprise,
+        models.ecole
       ]
     }
   )
-  .then(function (pointCpt) {
+  .then(function (campus) {
     res.send(
       {
         success: true,
         error: null,
         data: {
-          pointCpt: pointCpt
+          campus: campus
         }
       }
     );
@@ -49,17 +45,18 @@ router.get('/:id', function (req, res, next) {
     res.statusCode = 412;
     res.send(ErrorList.parametre.notInteger)
   } else {
-    models.pointCpt
+    models.campus
     .findById(
       id, {
         include: [
-          models.champCpt
+          models.Entreprise,
+          models.ecole
         ]
       })
-    .then(function (pointCpt) {
-      if (pointCpt === null) {
+    .then(function (campus) {
+      if (campus === null) {
         res.statusCode = 404;
-        res.send(ErrorList.pointCpt.notFound);
+        res.send(ErrorList.campus.notFound);
       }
       else {
         res.send(
@@ -67,7 +64,7 @@ router.get('/:id', function (req, res, next) {
             success: true,
             error: null,
             data: {
-              pointCpt: pointCpt
+              campus: campus
             }
           }
         );
@@ -78,31 +75,31 @@ router.get('/:id', function (req, res, next) {
 
 // insert one
 router.post('/', function (req, res, next) {
-  var libelle = req.body.libelle
-  var champCptId = req.body.champCptId
+  var entrepriseId = req.body.entrepriseId
+  var ecoleId = req.body.ecoleId
   if (libelle === false) {
     res.statusCode = 412;
     res.send(ErrorList.parametre.notInteger)
   } else {
-    models.pointCpt.findOne({
+    models.campus.findOne({
         where: {
-          libelle: libelle,
-          champCptId: champCptId
+          entrepriseId: entrepriseId,
+          ecoleId: ecoleId
         }
       })
-      .then(function (champCpt) {
-        if (champCpt !== null) {
+      .then(function (campus) {
+        if (campus !== null) {
           res.statusCode = 404;
-          res.send(ErrorList.pointCpt.alreadyExist);
+          res.send(ErrorList.campus.alreadyExist);
         }
         else {
-          models.pointCpt.findOrCreate({
+          models.campus.findOrCreate({
               where: {
-                libelle: libelle,
-                champCptId: champCptId
+                entrepriseId: entrepriseId,
+                ecoleId: ecoleId
               }
             }
-          ).spread(function (pointCpt, created) {
+          ).spread(function (campus, created) {
             if (created) {
               res.statusCode = 200;
             }
@@ -113,7 +110,7 @@ router.post('/', function (req, res, next) {
               success: true,
               error: null,
               data: {
-                pointCpt: pointCpt
+                campus: campus
               }
             });
           });
